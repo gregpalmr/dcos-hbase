@@ -8,11 +8,11 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
 Requirements: 
 - At least 7 private nodes in your cluster.
-     (See: https://docs.mesosphere.com/1.10/installing/ent/custom/system-requirements)
+     - (See: https://docs.mesosphere.com/1.10/installing/ent/custom/system-requirements)
 - A running HDFS service (it will be started by the script, if not already running).
-     (See: https://docs.mesosphere.com/services/hdfs/2.0.4-2.6.0-cdh5.11.0) 
+     - (See: https://docs.mesosphere.com/services/hdfs/2.0.4-2.6.0-cdh5.11.0) 
 - The DC/OS Command Line Interface (CLI) installed, configured and logged in to your cluster.
-     (See: https://docs.mesosphere.com/1.10/cli)
+     - (See: https://docs.mesosphere.com/1.10/cli)
 
 ## Steps
 
