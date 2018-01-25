@@ -89,6 +89,8 @@ TBD
 
      - Get the native-hadoop libraries working
 
+     - Add the Regionserver Web UI IPs/Ports to the UI Proxy
+
      - Create a custom package and framework using the DC/OS Service SDK
 
      - Co-locate the HBase Regionservers with the HDFS Datanodes
