@@ -89,7 +89,7 @@ TBD
 
      - Get the native-hadoop libraries working
 
-     - Create a customer package and framework using the DC/OS Service SDK
+     - Create a custom package and framework using the DC/OS Service SDK
 
      - Co-locate the HBase Regionservers with the HDFS Datanodes
 
