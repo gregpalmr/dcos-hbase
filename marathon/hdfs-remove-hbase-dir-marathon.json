@@ -1,0 +1,20 @@
+{
+  "id": "hdfs-remove-hbase-dir",
+  "instances": 1,
+  "portDefinitions": [],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "mesosphere/hdfs-client:1.0.0-2.6.0"
+    }
+  },
+  "cpus": 0.5,
+  "mem": 2048,
+  "requirePorts": false,
+  "networks": [],
+  "healthChecks": [],
+  "fetch": [],
+  "constraints": [],
+  "cmd": "wget http://api.hdfs.marathon.l4lb.thisdcos.directory:80/v1/endpoints/hdfs-site.xml && wget http://api.hdfs.marathon.l4lb.thisdcos.directory:80/v1/endpoints/core-site.xml && mv hdfs-site.xml etc/hadoop/ && mv core-site.xml etc/hadoop/ && bin/hadoop fs -rm -R /hbase"
+}

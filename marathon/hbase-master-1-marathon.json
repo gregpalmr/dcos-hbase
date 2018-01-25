@@ -1,0 +1,86 @@
+{
+  "id": "/hbase/hbase-master-1",
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "cmd": "export JAVA_HOME=$(find /opt/mesosphere/packages |grep jre$) && export HBASE_HOME=$MESOS_SANDBOX/hbase-1.2.0-cdh5.11.0 && export HBASE_CONF_DIR=$HBASE_HOME/conf && mv core-site.xml $HBASE_HOME/conf && mv hdfs-site.xml  $HBASE_HOME/conf && mv hbase-site.xml  $HBASE_HOME/conf && $HBASE_HOME/bin/hbase master start",
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "container": {
+    "type": "MESOS",
+    "volumes": []
+  },
+  "cpus": 1,
+  "disk": 5000,
+  "env": {
+    "HBASE_HEAPSIZE": "3096"
+  },
+  "fetch": [
+    {
+      "uri": "http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints/hdfs-site.xml",
+      "extract": false,
+      "executable": false,
+      "cache": false
+    },
+    {
+      "uri": "http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints/core-site.xml",
+      "extract": false,
+      "executable": false,
+      "cache": false
+    },
+    {
+      "uri": "https://s3-us-west-2.amazonaws.com/greg-palmer/hbase/hbase-1.2.0-cdh5.11.0/conf/hbase-site.xml",
+      "extract": false,
+      "executable": false,
+      "cache": false
+    },
+    {
+      "uri": "http://archive.cloudera.com/cdh5/cdh/5/hbase-1.2.0-cdh5.11.0.tar.gz",
+      "extract": true,
+      "executable": false,
+      "cache": true
+    }
+  ],
+  "instances": 1,
+  "labels": {
+    "HAPROXY_GROUP": "external"
+  },
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 4096,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "host"
+    }
+  ],
+  "portDefinitions": [
+    {
+      "name": "hbase-master-port",
+      "protocol": "tcp",
+      "port": 60000
+    },
+    {
+      "labels": {
+        "VIP_1": "/hbase/masters:60010"
+      },
+      "name": "hbase-master-info-port",
+      "protocol": "tcp",
+      "servicePort": 10010,
+      "port": 60010
+    }
+  ],
+  "requirePorts": false,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 1
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "healthChecks": []
+}

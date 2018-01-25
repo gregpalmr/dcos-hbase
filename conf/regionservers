@@ -1,0 +1,3 @@
+regionserver-0.hbase.marathon.mesos
+regionserver-1.hbase.marathon.mesos
+regionserver-2.hbase.marathon.mesos

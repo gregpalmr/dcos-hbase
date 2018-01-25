@@ -1,0 +1,20 @@
+{
+  "id": "hbase-zookeeper-commands",
+  "instances": 1,
+  "cmd": "/janitor.py -z hbase",
+  "portDefinitions": [],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "mesosphere/janitor"
+    }
+  },
+  "cpus": 0.1,
+  "mem": 128,
+  "requirePorts": false,
+  "networks": [],
+  "healthChecks": [],
+  "fetch": [],
+  "constraints": []
+}
