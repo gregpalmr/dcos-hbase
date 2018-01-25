@@ -63,6 +63,8 @@ Apache HBase running on DC/OS and Mesos
 
           #> bin/hadoop fs -ls /hbase
 
+          #> bin/hadoop fs -ls -R hdfs://hdfs/hbase/data/default/customers
+
 ## 5. Shutdown the HBase service
 
      $ scripts/stop-hbase.sh
