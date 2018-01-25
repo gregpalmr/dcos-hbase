@@ -4,7 +4,7 @@ Apache HBase running on DC/OS and Mesos without Docker containers
      *** NOTE: The artifacts in this repo are provided for convenience ***
      *** and are not directly supported by Mesosphere, Inc.            ***
 
-# Quickstart:
+# Quickstart
 
 Requirements: 
 - At least 7 private nodes in your DC/OS cluster.
@@ -52,5 +52,20 @@ Requirements:
      or
 
      $ scripts/stop-hbase.sh cleanup   # remove the HBase Zookeeper znodes and HBase HDFS dirs too
+
+
+# Advanced
+
+## Using Persistent Disk Volumes
+
+TBD
+
+## Using MOUNT Disk Volumes
+
+TBD
+
+## Modifying the HBase configuration in hbase-site.xml
+
+TBD
 
 
