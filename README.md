@@ -7,12 +7,14 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 # Quickstart
 
 ## Requirements: 
-- At least 7 private nodes in your DC/OS cluster.
+- At least 7 private agent nodes in your DC/OS cluster and at least 1 public agent node.
      - (See: https://docs.mesosphere.com/1.10/installing/ent/custom/system-requirements)
 - A running HDFS service (it will be started by the script, if not already running).
      - (See: https://docs.mesosphere.com/services/hdfs/2.0.4-2.6.0-cdh5.11.0) 
 - The DC/OS Command Line Interface (CLI) installed, configured and logged in to your cluster.
      - (See: https://docs.mesosphere.com/1.10/cli)
+- A running Marathon-LB instance to access the HBase Web UI
+     - (See: https://docs.mesosphere.com/services/marathon-lb/advanced)
 
 ## Steps
 
@@ -26,7 +28,19 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
      $ scripts/start-hbase.sh 3
 
-## 3. Run the HBase Shell
+## 3. View the HBase Web UI via the Marathon-LB load balancer
+
+     a. If Marthon-LB is not already running start it with the command:
+
+          $ dcos package install --yes marathon-lb
+
+     b. Get the public IP address of the public agent node on which Marathon-LB is running
+
+     c. Point your web browser to the load balanced port on the public agent node:
+
+          http://<public agent public ip addr>:10010
+        
+## 4. Run the HBase Shell
 
      $ dcos task exec --interactive --tty hbase_hbase-shell-session bash
 
@@ -69,7 +83,7 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
 TBD
 
-## 1. Bulk loading data into HBase tables
+## 2. Bulk loading data into HBase tables
 
 TBD
 
