@@ -47,11 +47,11 @@ Apache HBase running on DC/OS and Mesos
            hbase(main):002:0> version
            hbase(main):003:0> create 'customers', 'profile_data', 'usage_data'
            hbase(main):004:0> list
-           hbase(main):003:0> put 'customers',1,'profile_data:userid','user1'
-           hbase(main):003:0> put 'customers', 1 ,'profile_data:full_name','John Doe'
-           hbase(main):003:0> put 'customers', 1 ,'usage_data:usage_datetime','2018-01-05T15:12:000'
-           hbase(main):003:0> put 'customers', 1 ,'usage_data:module_accessed','shoppping_cart'
-           hbase(main):003:0> scan 'customers'
+           hbase(main):005:0> put 'customers',1,'profile_data:userid','user1'
+           hbase(main):006:0> put 'customers', 1 ,'profile_data:full_name','John Doe'
+           hbase(main):007:0> put 'customers', 1 ,'usage_data:usage_datetime','2018-01-05T15:12:000'
+           hbase(main):008:0> put 'customers', 1 ,'usage_data:module_accessed','shoppping_cart'
+           hbase(main):009:0> scan 'customers'
 
      In the example above, HBase will place the table data in the HDFS filesystem at the location:
 
