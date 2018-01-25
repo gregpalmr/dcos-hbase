@@ -65,10 +65,18 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
 # Advanced
 
-## Modifying the HBase configuration in hbase-site.xml
+## 1. Modifying the HBase configuration in hbase-site.xml
 
 TBD
 
-## Bulk loading data into HBase tables
+## 1. Bulk loading data into HBase tables
 
 TBD
+
+
+## TODO
+
+     - Get the native-hadoop libraries working
+
+     - Create a customer package and framework using the DC/OS Service SDK
+
