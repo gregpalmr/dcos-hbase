@@ -244,6 +244,14 @@ echo
 dcos marathon app add marathon/hbase-shell-marathon.json
 
 echo
+echo " ###############################################"
+echo " ### Starting the HBase Master UI Proxy      ###"
+echo " ###############################################"
+echo
+
+dcos marathon app add marathon/hbase-master-ui-proxy-marathon.json
+
+echo
 echo " ###############################################################################"
 echo " ###                                                                         ###"
 echo " ### HBase startup is complete.                                              ###"
@@ -263,8 +271,13 @@ echo "     #> source hbase_env.sh                                               
 echo "     #> \$HBASE_HOME/bin/hbase shell                                      "
 echo "         hbase(main):001:0> status                                        "
 echo "         hbase(main):002:0> version                                       "
-echo "         hbase(main):003:0> create 't1', 'f1', 'f2', 'f3'                 "
+echo "         hbase(main):003:0> create 'customers', 'profile_data', 'usage_data' "
 echo "         hbase(main):004:0> list                                          "
+echo "         hbase(main):004:0> put 'customers',1,'profile_data:userid','user1'  "
+echo "         hbase(main):004:0> put 'customers', 1 ,'profile_data:full_name','John Doe' "
+echo "         hbase(main):004:0> put 'customers', 1 ,'usage_data:usage_datetime','2018-01-05T15:12:000' "
+echo "         hbase(main):004:0> put 'customers', 1 ,'usage_data:module_accessed','shoppping_cart' "
+echo "         hbase(main):004:0> scan 'customers' "
 echo "                                                                          "
 echo " # You can run hdfs filesystem commands by using the                      "
 echo " # following commands:                                                    " 
