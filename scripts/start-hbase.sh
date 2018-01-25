@@ -84,7 +84,7 @@ echo
 
 echo
 echo " #################################################"
-echo " ###   Checking for at least 7 Private Agents ###"
+echo " ###   Checking for at least 7 Private Agents  ###"
 echo " #################################################"
 echo
 
@@ -107,8 +107,8 @@ then
     echo
     exit 1
 fi
-echo
 echo "    DC/OS Agent Node Count is Sufficient."
+echo
 
 
 ###
@@ -135,14 +135,14 @@ then
         printf "."
     else
         echo
-        echo " HDFS service is running."
+        echo "    HDFS service is running."
     fi
 else
 
     echo
-    echo " ##############################"
-    echo " ###      Starting HDFS     ###"
-    echo " ##############################"
+    echo " ######################################"
+    echo " ###        Starting HDFS           ###"
+    echo " ######################################"
     echo
     dcos package install --options=marathon/hdfs-package-options.json hdfs --yes
 
@@ -177,19 +177,21 @@ else
 fi
 
 echo
-echo " #####################################"
-echo " ### Starting HBase Masters        ###"
-echo " #####################################"
+echo " ########################################"
+echo " ###    Starting HBase Masters        ###"
+echo " ########################################"
 echo
 
-echo " Starting HBase masters"
+echo "   Starting HBase masters"
 echo
 
-dcos marathon app add marathon/hbase-master-0-marathon.json
+sed s/\{\{MASTER_NUMBER\}\}/0/g marathon/hbase-master-marathon.json.template > /tmp/hbase-master-0-marathon.json
+dcos marathon app add /tmp/hbase-master-0-marathon.json
 
 sleep 5
 
-dcos marathon app add marathon/hbase-master-1-marathon.json
+sed s/\{\{MASTER_NUMBER\}\}/1/g marathon/hbase-master-marathon.json.template > /tmp/hbase-master-1-marathon.json
+dcos marathon app add /tmp/hbase-master-1-marathon.json
 
 echo
 echo " Waiting for HBase Masters to start. "
@@ -215,16 +217,10 @@ echo " ### Starting HBase Regionservers            ###"
 echo " ###############################################"
 echo
 
-regionserver_count=$((REQUESTED_REGIONSERVER_COUNT-1))
-for i in $(eval echo "{0..$regionserver_count}")
-do
-    sed s/\{\{REGIONSERVER_NUMBER\}\}/$i/g marathon/hbase-regionserver-template-marathon.json > /tmp/hbase-regionserver-${i}-marathon.json
+sed s/\{\{REGIONSERVER_COUNT\}\}/$REQUESTED_REGIONSERVER_COUNT/g marathon/hbase-regionservers-marathon.json.template > /tmp/hbase-regionservers-marathon.json
 
-    echo " Starting hbase-regionserver-$i"
-    dcos marathon app add /tmp/hbase-regionserver-${i}-marathon.json
-
-    sleep 2
-done
+echo " Starting $REQUESTED_REGIONSERVER_COUNT hbase-regionservers"
+dcos marathon app add /tmp/hbase-regionservers-marathon.json
 
 echo
 echo " Waiting for HBase Regionservers to start. "
@@ -260,25 +256,27 @@ echo " ### You can view the HBase Web Console at:                               
 echo " ###                                                                         ###"
 echo " ###   http://<public agent ip>:10010                                        ###"
 echo " ###                                                                         ###"
-echo " ### You can run hbase shell commands by using the                                     ###"
-echo " ### following commands:                                                     ###"
-echo " ###                                                                         ###"
-echo " ### $ dcos task exec --interactive --tty hbase_hbase-shell-session bash     ###"
-echo " ###    #> source hbase_env.sh                                                         ###"
-echo " ###    #> $HBASE_HOME/bin/hbase shell                                       ###"
-echo " ###        hbase(main):001:0> status                                        ###"
-echo " ###        hbase(main):002:0> version                                       ###"
-echo " ###        hbase(main):003:0> create 't1', 'f1', 'f2', 'f3'                 ###"
-echo " ###        hbase(main):004:0> list                                          ###"
-echo " ###                                                                         ###"
-echo " ### You can run hdfs filesystem commands by using the                       ###"
-echo " ### following commands:                                                     ###"
-echo " ###                                                                         ###"
-echo " ### $ dcos node ssh --master-proxy --leader \                               ###"
-echo " ###       \"docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash\"          ###"
-echo " ###   #> bin/hadoop fs -ls /hbase                                           ###"
 echo " ###                                                                         ###"
 echo " ###############################################################################"
+echo
+echo " # You can run hbase shell commands by using the                          "
+echo " # following commands:                                                    "
+echo
+echo " $ dcos task exec --interactive --tty hbase_hbase-shell-session bash      "
+echo "     #> source hbase_env.sh                                               "
+echo "     #> \$HBASE_HOME/bin/hbase shell                                      "
+echo "         hbase(main):001:0> status                                        "
+echo "         hbase(main):002:0> version                                       "
+echo "         hbase(main):003:0> create 't1', 'f1', 'f2', 'f3'                 "
+echo "         hbase(main):004:0> list                                          "
+echo "                                                                          "
+echo " # You can run hdfs filesystem commands by using the                      "
+echo " # following commands:                                                    " 
+echo
+echo "  $ dcos node ssh --master-proxy --leader \\                              "
+echo "        \"docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash\"        "
+echo "    #> bin/hadoop fs -ls /hbase                                           "
+echo 
 echo
 
 # End of Script

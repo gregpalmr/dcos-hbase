@@ -13,7 +13,9 @@ else
     echo " Stopping HBase tasks. "
     echo
     echo " NOTE: To cleanup Zookeeper znodes and HDFS directories, use the \"cleanup\" option."
+    echo
     echo "   e.g.   $ scripts/stop-hbase.sh cleanup "
+    echo
 fi
 
 echo
@@ -31,18 +33,21 @@ fi
 echo
 echo " ### Stopping HBase Regionservers "
 
-running_task_count=$(dcos task |grep hbase-regionserver- | awk '{print $4}' | grep R | wc -l)
+running_task_count=$(dcos task |grep hbase-regionservers | awk '{print $4}' | grep R | wc -l)
 
 if [ "$running_task_count" -gt 0 ]
 then
+    echo "     dcos marathon app remove /hbase/hbase-regionservers"
+    dcos marathon app remove /hbase/hbase-regionservers
 
-    running_task_count=$((running_task_count-1))
+#    running_task_count=$((running_task_count-1))
+#
+#    for i in $(eval echo "{0..$running_task_count}")
+#    do
+#        echo "     dcos marathon app remove /hbase/hbase-regionserver"
+#        dcos marathon app remove /hbase/hbase-regionserver
+#    done
 
-    for i in $(eval echo "{0..$running_task_count}")
-    do
-        echo "     dcos marathon app remove /hbase/hbase-regionserver-${i}"
-        dcos marathon app remove /hbase/hbase-regionserver-${i}
-    done
 fi
 
 echo
