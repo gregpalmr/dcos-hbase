@@ -13,8 +13,6 @@ Apache HBase running on DC/OS and Mesos without Docker containers
      - (See: https://docs.mesosphere.com/services/hdfs/2.0.4-2.6.0-cdh5.11.0) 
 - The DC/OS Command Line Interface (CLI) installed, configured and logged in to your cluster.
      - (See: https://docs.mesosphere.com/1.10/cli)
-- A running Marathon-LB instance to access the HBase Web UI
-     - (See: https://docs.mesosphere.com/services/marathon-lb/advanced)
 
 ## Steps
 
@@ -28,17 +26,13 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
      $ scripts/start-hbase.sh 3
 
-## 3. View the HBase Web UI via the Marathon-LB load balancer
+## 3. View the HBase Web UI via the custom UI Proxy
 
-     a. If Marthon-LB is not already running start it with the command:
+     b. Get the public IP address of the public agent node on which the hbase-master-ui-proxy service is running
 
-          $ dcos package install --yes marathon-lb
+     c. Point your web browser to the Master UI proxy port on the public agent node:
 
-     b. Get the public IP address of the public agent node on which Marathon-LB is running
-
-     c. Point your web browser to the load balanced port on the public agent node:
-
-          http://<public agent public ip addr>:10010
+          http://<public agent public ip addr>:10610
         
 ## 4. Run the HBase Shell
 
@@ -93,4 +87,5 @@ TBD
      - Get the native-hadoop libraries working
 
      - Create a customer package and framework using the DC/OS Service SDK
+
 
