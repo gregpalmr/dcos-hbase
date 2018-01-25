@@ -1,5 +1,5 @@
 # dcos-hbase
-Apache HBase running on DC/OS and Mesos without Docker containers
+Apache HBase running on DC/OS and Mesos 
 
      *** NOTE: The artifacts in this repo are provided for convenience ***
      *** and are not directly supported by Mesosphere, Inc.            ***
