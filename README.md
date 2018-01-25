@@ -1,10 +1,9 @@
 # dcos-hbase
 Apache HBase running on DC/OS and Mesos without Docker containers
 
-Quickstart:
+# Quickstart:
 
 Requirements: 
-
      - At least 7 private nodes in your cluster.
      - A running HDFS service (it will be started by the script).
 
