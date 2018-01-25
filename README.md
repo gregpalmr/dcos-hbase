@@ -56,16 +56,10 @@ Requirements:
 
 # Advanced
 
-## Using Persistent Disk Volumes
-
-TBD
-
-## Using MOUNT Disk Volumes
-
-TBD
-
 ## Modifying the HBase configuration in hbase-site.xml
 
 TBD
 
+## Bulk loading data into HBase tables
 
+TBD
