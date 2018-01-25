@@ -3,7 +3,7 @@
   "instances": {{MASTER_COUNT}},
   "backoffFactor": 1.15,
   "backoffSeconds": 1,
-  "cmd": "export JAVA_HOME=$(find /opt/mesosphere/packages |grep jre$) && export HBASE_HOME=$MESOS_SANDBOX/hbase-1.2.0-cdh5.11.0 && export HBASE_CONF_DIR=$HBASE_HOME/conf && mv core-site.xml $HBASE_HOME/conf && mv hdfs-site.xml  $HBASE_HOME/conf && mv hbase-site.xml  $HBASE_HOME/conf && $HBASE_HOME/bin/hbase master start",
+  "cmd": "export JAVA_HOME=$(find /opt/mesosphere/packages |grep jre$) && export HBASE_HOME=$MESOS_SANDBOX/hbase-1.2.0-cdh5.11.0 && export HBASE_CONF_DIR=$HBASE_HOME/conf && mv core-site.xml $HBASE_HOME/conf && mv hdfs-site.xml $HBASE_HOME/conf && mv hbase-site.xml $HBASE_HOME/conf && mv phoenix-*.jar $HBASE_HOME/lib && $HBASE_HOME/bin/hbase master start",
   "constraints": [
     [
       "hostname",
@@ -43,11 +43,20 @@
       "extract": true,
       "executable": false,
       "cache": true
+    },
+    {
+      "uri": "https://raw.githubusercontent.com/gregpalmr/dcos-hbase/master/lib/phoenix-4.13.1-HBase-1.2-server.jar",
+      "extract": false,
+      "executable": false,
+      "cache": false
+    },
+    {
+      "uri": "https://raw.githubusercontent.com/gregpalmr/dcos-hbase/master/lib/phoenix-4.13.1-HBase-1.2-client.jar",
+      "extract": false,
+      "executable": false,
+      "cache": false
     }
   ],
-  "labels": {
-    "HAPROXY_GROUP": "external"
-  },
   "maxLaunchDelaySeconds": 3600,
   "mem": 4096,
   "gpus": 0,
