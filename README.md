@@ -18,7 +18,7 @@ Requirements:
 
      $ cd dcos-hbase
 
-## 2. Run the start script with 3 regionserver
+## 2. Run the start script with 2 HBase masters and 3 regionservers
 
      $ scripts/start-hbase.sh 3
 
