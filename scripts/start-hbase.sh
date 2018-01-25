@@ -17,6 +17,8 @@ else
     REQUESTED_REGIONSERVER_COUNT=$1
 fi
 
+REQUESTED_MASTER_COUNT=2
+
 echo
 echo " #################################"
 echo " ### Verifying DC/OS CLI Setup ###"
@@ -185,22 +187,17 @@ echo
 echo "   Starting HBase masters"
 echo
 
-sed s/\{\{MASTER_NUMBER\}\}/0/g marathon/hbase-master-marathon.json.template > /tmp/hbase-master-0-marathon.json
-dcos marathon app add /tmp/hbase-master-0-marathon.json
-
-sleep 5
-
-sed s/\{\{MASTER_NUMBER\}\}/1/g marathon/hbase-master-marathon.json.template > /tmp/hbase-master-1-marathon.json
-dcos marathon app add /tmp/hbase-master-1-marathon.json
+sed s/\{\{MASTER_COUNT\}\}/$REQUESTED_MASTER_COUNT/g marathon/hbase-masters-marathon.json.template > /tmp/hbase-masters-marathon.json
+dcos marathon app add /tmp/hbase-masters-marathon.json
 
 echo
 echo " Waiting for HBase Masters to start. "
 
 while true 
 do
-    running_task_count=$(dcos task |grep hbase-master- | awk '{print $4}' | grep R | wc -l)
+    running_task_count=$(dcos task |grep hbase-masters | awk '{print $4}' | grep R | wc -l)
 
-    if [ "$running_task_count" -ne 2  ]
+    if [ "$running_task_count" -ne $REQUESTED_MASTER_COUNT ]
     then
         printf "."
     else
@@ -209,7 +206,6 @@ do
     fi
     sleep 10
 done
-
 
 echo
 echo " ###############################################"
