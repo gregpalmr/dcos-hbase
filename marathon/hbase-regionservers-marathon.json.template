@@ -1,5 +1,6 @@
 {
-  "id": "/hbase/hbase-regionserver-{{REGIONSERVER_NUMBER}}",
+  "id": "/hbase/hbase-regionservers",
+  "instances": {{REGIONSERVER_COUNT}},
   "backoffFactor": 1.15,
   "backoffSeconds": 1,
   "cmd": "export JAVA_HOME=$(find /opt/mesosphere/packages |grep jre$) && export HBASE_HOME=$MESOS_SANDBOX/hbase-1.2.0-cdh5.11.0 && export HBASE_CONF_DIR=$HBASE_HOME/conf && mv core-site.xml $HBASE_HOME/conf && mv hdfs-site.xml  $HBASE_HOME/conf && mv hbase-site.xml  $HBASE_HOME/conf && $HBASE_HOME/bin/hbase regionserver start",
@@ -32,7 +33,7 @@
       "cache": false
     },
     {
-      "uri": "https://s3-us-west-2.amazonaws.com/greg-palmer/hbase/hbase-1.2.0-cdh5.11.0/conf/hbase-site.xml",
+      "uri": "https://raw.githubusercontent.com/gregpalmr/dcos-hbase/master/conf/hbase-site.xml",
       "extract": false,
       "executable": false,
       "cache": false
@@ -44,7 +45,6 @@
       "cache": true
     }
   ],
-  "instances": 1,
   "labels": {
     "HAPROXY_GROUP": "external"
   },
@@ -82,5 +82,12 @@
     "inactiveAfterSeconds": 0,
     "expungeAfterSeconds": 0
   },
-  "healthChecks": []
+  "healthChecks": [
+    {
+      "protocol": "COMMAND",
+      "command": {
+        "value": "curl 127.0.0.1:60030"
+      }
+    }
+  ]
 }
