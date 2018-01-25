@@ -7,6 +7,8 @@ Requirements:
 - At least 7 private nodes in your cluster.
 - A running HDFS service (it will be started by the script).
 
+# Steps
+
 1. Clone this repository
 
      $ git clone https://github.com/gregpalmr/dcos-hbase
