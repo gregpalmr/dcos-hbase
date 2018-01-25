@@ -28,9 +28,10 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
 ## 3. View the HBase Web UI via the custom UI Proxy
 
-     b. Get the public IP address of the public agent node on which the hbase-master-ui-proxy service is running
+     a. Get the public IP address of the public agent node on which the 
+        hbase-master-ui-proxy service is running
 
-     c. Point your web browser to the Master UI proxy port on the public agent node:
+     b. Point your web browser to the Master UI proxy port on the public agent node:
 
           http://<public agent public ip addr>:10610
         
