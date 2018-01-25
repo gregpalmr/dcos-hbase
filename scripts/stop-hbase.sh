@@ -12,7 +12,7 @@ else
     echo
     echo " Stopping HBase tasks. "
     echo
-    echo " NOTE: To cleanup Zookeeper nodes and HDFS directories, use the \"cleanup\" option."
+    echo " NOTE: To cleanup Zookeeper znodes and HDFS directories, use the \"cleanup\" option."
     echo "   e.g.   $ scripts/stop-hbase.sh cleanup "
 fi
 
