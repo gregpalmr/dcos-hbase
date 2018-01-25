@@ -47,6 +47,6 @@ Requirements:
 
      or
 
-     $ scripts/stop-hbase.sh cleanup   # remove the zookeeper dirs and HDFS dirs too
+     $ scripts/stop-hbase.sh cleanup   # remove the HBase Zookeeper nodes and HBase HDFS dirs too
 
 
