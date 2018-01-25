@@ -12,17 +12,17 @@ Requirements:
 
 ## Steps
 
-##1. Clone this repository
+## 1. Clone this repository
 
      $ git clone https://github.com/gregpalmr/dcos-hbase
 
      $ cd dcos-hbase
 
-##2. Run the start script with 3 regionserver
+## 2. Run the start script with 3 regionserver
 
      $ scripts/start-hbase.sh 3
 
-##3. Run the HBase Shell
+## 3. Run the HBase Shell
 
      $ dcos task exec --interactive --tty hbase_hbase-shell-session bash
 
@@ -35,13 +35,13 @@ Requirements:
            hbase(main):003:0> create 't1', 'f1', 'f2', 'f3'
            hbase(main):004:0> list
 
-##4. View the shared HBase directories in HDFS
+## 4. View the shared HBase directories in HDFS
 
      $ dcos node ssh --master-proxy --leader "docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash"
 
           #> bin/hadoop fs -ls /hbase
 
-##5. Shutdown the HBase service
+## 5. Shutdown the HBase service
 
      $ scripts/stop-hbase.sh
 
