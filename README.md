@@ -33,7 +33,7 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
      b. Point your web browser to the Master UI proxy port on the public agent node:
 
-          http://<public agent public ip addr>:10610
+          http://<public agent public ip addr>:16010
         
 ## 4. Run the HBase Shell
 
