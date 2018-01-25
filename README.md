@@ -36,8 +36,17 @@ Apache HBase running on DC/OS and Mesos without Docker containers
 
            hbase(main):001:0> status
            hbase(main):002:0> version
-           hbase(main):003:0> create 't1', 'f1', 'f2', 'f3'
+           hbase(main):003:0> create 'customers', 'profile_data', 'usage_data'
            hbase(main):004:0> list
+           hbase(main):003:0> put 'customers',1,'profile_data:userid','user1'
+           hbase(main):003:0> put 'customers', 1 ,'profile_data:full_name','John Doe'
+           hbase(main):003:0> put 'customers', 1 ,'usage_data:usage_datetime','2018-01-05T15:12:000'
+           hbase(main):003:0> put 'customers', 1 ,'usage_data:module_accessed','shoppping_cart'
+           hbase(main):003:0> scan 'customers'
+
+     In the example above, HBase will place the table data in the HDFS filesystem at the location:
+
+          hdfs://hdfs/hbase/data/default/customers
 
 ## 4. View the shared HBase directories in HDFS
 
