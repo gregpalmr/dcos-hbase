@@ -32,10 +32,9 @@ Requirements:
 
 4. View the shared HBase directories in HDFS
 
-     $ dcos node ssh --master-proxy --leader \
-          "docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash"
+     $ dcos node ssh --master-proxy --leader "docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash"
 
-      #> bin/hadoop fs -ls /hbase
+          #> bin/hadoop fs -ls /hbase
 
 5. Shutdown the HBase service
 
