@@ -58,11 +58,12 @@
     "inactiveAfterSeconds": 0,
     "expungeAfterSeconds": 0
   },
-  "healthChecks": [],
-  "constraints": [
-    [
-      "hostname",
-      "UNIQUE"
-    ]
+  "healthChecks": [
+    {
+      "protocol": "COMMAND",
+      "command": {
+        "value": "true"
+      }
+    }
   ]
 }
