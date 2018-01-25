@@ -53,23 +53,18 @@ fi
 echo
 echo " ### Stopping HBase Masters "
 
-running_task_count=$(dcos task |grep hbase-master- | awk '{print $4}' | grep R | wc -l)
-
-if [ "$running_task_count" -gt 0 ]
-then
-    running_task_count=$((running_task_count-1))
-
-    for i in $(eval echo "{0..$running_task_count}")
-    do
-        echo "     dcos marathon app remove /hbase/hbase-master-${i}"
-        dcos marathon app remove /hbase/hbase-master-${i}
-    done
-fi
+echo "     dcos marathon app remove /hbase/hbase-masters "
+dcos marathon app remove /hbase/hbase-masters
 
 echo
 echo " ### Stopping HBase Shell Session "
 
 dcos marathon app remove  /hbase/hbase-shell-session
+
+echo
+echo " ### Stopping HBase Master UI Proxy"
+
+dcos marathon app remove  /hbase/hbase-master-ui-proxy
 
 echo
 echo " ### Waiting for all tasks to stop "
