@@ -39,9 +39,7 @@ Apache HBase running on DC/OS and Mesos
 
      $ dcos task exec --interactive --tty hbase_hbase-shell-session bash
 
-       #> source hbase_env.sh
-
-       #> $HBASE_HOME/bin/hbase shell
+       #> source hbase_env.sh && $HBASE_HOME/bin/hbase shell
 
            hbase(main):001:0> status
            hbase(main):002:0> version
