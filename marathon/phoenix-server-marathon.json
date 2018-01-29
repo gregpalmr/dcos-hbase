@@ -1,0 +1,60 @@
+{
+  "id": "/hbase/phoenix-server",
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "container": {
+    "type": "MESOS",
+    "volumes": [],
+    "docker": {
+      "image": "gregpalmermesosphere/dcos-phoenix:4.13.1-hbase-1.2",
+      "forcePullImage": false,
+      "parameters": []
+    }
+  },
+  "cpus": 0.5,
+  "disk": 2058,
+  "env": {
+    "ZOOKEEPER_ZNODE_PARENT": "hbase",
+    "HBASE_ZOOKEEPER_PROPERTY_CLIENTPORT": "2181",
+    "HBASE_ZOOKEEPER_QUORUM": "master.mesos"
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "timeoutSeconds": 20,
+      "delaySeconds": 15,
+      "protocol": "MESOS_TCP"
+    }
+  ],
+  "instances": 1,
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 128,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "host"
+    }
+  ],
+  "requirePorts": true,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 1
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "fetch": [],
+  "constraints": [],
+  "portDefinitions": [
+    {
+      "name": "phoenix-server-port",
+      "protocol": "tcp",
+      "port": 8765
+    }
+  ]
+}
