@@ -119,7 +119,7 @@ echo
 
 echo
 echo " #################################################"
-echo " ### Checking if the HDFS service is running.  ###"
+echo " ### Checking if the HDFS service is running   ###"
 echo " #################################################"
 
 # Get the number of data nodes
@@ -252,16 +252,33 @@ echo
 dcos marathon app add marathon/hbase-master-ui-proxy-marathon.json
 
 echo
+echo " Waiting for HBase Masters UI Proxy to start. "
+
+while true 
+do
+    running_task_count=$(dcos task |grep hbase-master-ui-proxy | awk '{print $4}' | grep R | wc -l)
+
+    if [ "$running_task_count" -ne 1 ]
+    then
+        printf "."
+    else
+        echo " HBase Master UI Proxy is running."
+        break
+    fi
+    sleep 10
+done
+
+proxyUrl=$(dcos task log hbase_hbase-master-ui-proxy stdout | grep jquery.min | awk '{print $11}' | sed s/\"//)
+
+echo
 echo " ###############################################################################"
-echo " ###                                                                         ###"
-echo " ### HBase startup is complete.                                              ###"
-echo " ###                                                                         ###"
-echo " ### You can view the HBase Web Console at:                                  ###"
-echo " ###                                                                         ###"
-echo " ###   http://<public agent ip>:10010                                        ###"
-echo " ###                                                                         ###"
-echo " ###                                                                         ###"
-echo " ###############################################################################"
+echo " ###                                                                         "
+echo " ### HBase startup is complete.                                              "
+echo " ###                                                                         "
+echo " ### You can view the HBase Web Console at:                                  "
+echo " ###                                                                         "
+echo " ###   http://<public agent public ip addr>:16010 "
+echo " ###                                                                         "
 echo
 echo " # You can run hbase shell commands by using the                          "
 echo " # following commands:                                                    "
@@ -287,5 +304,6 @@ echo "        \"docker run -it mesosphere/hdfs-client:1.0.0-2.6.0 bash\"        
 echo "    #> bin/hadoop fs -ls /hbase                                           "
 echo 
 echo
+echo " ###############################################################################"
 
 # End of Script
